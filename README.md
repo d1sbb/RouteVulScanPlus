@@ -1,10 +1,10 @@
 原项目扫描多了会导致卡死白屏，所有在这个修复版上增加了点小功能https://github.com/XinCaoZ/RouteVulScanPlus
 
 1.自定义减少误报，正则过滤响应包里的内容。  
-    在Config_yaml.yaml里对应respCustomFilter
-![222](https://raw.githubusercontent.com/d1sbb/RouteVulScanPlus/refs/heads/master/img/222.png)
+    在`Config_yaml.yaml`里对应`respCustomFilter`  
+![222](https://raw.githubusercontent.com/d1sbb/RouteVulScanPlus/refs/heads/master/img/222.png)  
     例子：`respCustomFilter: '("status":404)|(Disallow: /)'`
-![111](https://raw.githubusercontent.com/d1sbb/RouteVulScanPlus/refs/heads/master/img/111.png)
+![111](https://raw.githubusercontent.com/d1sbb/RouteVulScanPlus/refs/heads/master/img/111.png)  
 2.startTime改为上海时区  
 
 原项目
