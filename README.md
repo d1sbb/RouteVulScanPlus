@@ -10,6 +10,8 @@
 原项目
 https://github.com/F6JO/RouteVulScan/blob/main/README.md
 
-如果出现error报错，请先下载https://github.com/F6JO/RouteVulScan/releases/tag/RouteVulScan1.5.4里的jar包
+如果出现error报错，请先下载 https://github.com/F6JO/RouteVulScan/releases/tag/RouteVulScan1.5.4 里的jar包
 
 并且放到你的burp设置Extensions -> Java environment里的文件夹里（因为我懒的继续学完整编译jar包了）
+![333](https://github.com/F6JO/RouteVulScan/blob/main/img/remove.jpg)
+<img width="1323" alt="image" src="https://github.com/user-attachments/assets/6d3350f1-f94c-4b98-89ce-d8638360c12b">
