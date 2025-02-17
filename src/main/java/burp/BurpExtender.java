@@ -74,7 +74,7 @@ public class BurpExtender implements IBurpExtender, IScannerCheck, IContextMenuF
         call.printOutput("==========================***============================");
         call.printOutput("修复了请求转换时删除参数时会出现类型不支持的错误");
         call.printOutput("新增目录过滤功能，可添加过滤的路由名称并开启过滤，跳过不想扫描的目录");
-        call.printOutput("新增响应包过滤功能，在Config_yaml.yaml里respCustomFilter设置");
+        call.printOutput("新增响应包过滤功能，在Config_yaml.yaml里CustomResp_List设置");
         call.setExtensionName(EXPAND_NAME + " " + VERSION);
         call.registerScannerCheck(this);
         call.registerContextMenuFactory(this);

@@ -83,21 +83,21 @@ public class vulscan {
             paths = new String[]{""};
         }
         List<String> Bypass_List = (List<String>) Yaml_Map.get("Bypass_List");
-        String respCustomFilter = (String) Yaml_Map.get("respCustomFilter");
+        String CustomResp_List = (String) Yaml_Map.get("CustomResp_List");
         //filter过滤路径
 //        if(burp.Filter){
 //            paths = getRemainingArray(paths);
 //        }
         if (burp.DomainScan) {
-            LaunchPath(true, domainNames, Listx, newHttpRequestResponse, heads, Bypass_List, respCustomFilter);
+            LaunchPath(true, domainNames, Listx, newHttpRequestResponse, heads, Bypass_List, CustomResp_List);
         }
-        LaunchPath(false,paths,Listx,newHttpRequestResponse,heads,Bypass_List, respCustomFilter);
+        LaunchPath(false,paths,Listx,newHttpRequestResponse,heads,Bypass_List, CustomResp_List);
 
 
 
     }
 
-    private void LaunchPath(Boolean ClearPath_record ,String[] paths,List<Map<String, Object>> Listx,IHttpRequestResponse newHttpRequestResponse,List<String> heads,List<String> Bypass_List,String respCustomFilter){
+    private void LaunchPath(Boolean ClearPath_record ,String[] paths,List<Map<String, Object>> Listx,IHttpRequestResponse newHttpRequestResponse,List<String> heads,List<String> Bypass_List,String CustomResp_List){
         this.Path_record = "";
         for (String path : paths) {
             if (ClearPath_record){
@@ -128,7 +128,7 @@ public class vulscan {
                     this.burp.history_url.add(url);
                 }
                 for (Map<String, Object> zidian : Listx) {
-                    this.burp.ThreadPool.execute(new threads(zidian, this, newHttpRequestResponse, heads, Bypass_List, respCustomFilter));
+                    this.burp.ThreadPool.execute(new threads(zidian, this, newHttpRequestResponse, heads, Bypass_List, CustomResp_List));
                 }
 
 

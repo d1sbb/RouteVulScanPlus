@@ -23,15 +23,15 @@ public class threads implements Task {
     private IHttpRequestResponse newHttpRequestResponse;
     private List<String> heads;
     private List<String> Bypass_List;
-    private String respCustomFilter;
+    private String CustomResp_List;
 
-    public threads(Map<String, Object> zidian, vulscan vul, IHttpRequestResponse newHttpRequestResponse, List<String> heads, List<String> Bypass_List,String respCustomFilter) {
+    public threads(Map<String, Object> zidian, vulscan vul, IHttpRequestResponse newHttpRequestResponse, List<String> heads, List<String> Bypass_List,String CustomResp_List) {
         this.zidian = zidian;
         this.vul = vul;
         this.newHttpRequestResponse = newHttpRequestResponse;
         this.heads = heads;
         this.Bypass_List = Bypass_List;
-        this.respCustomFilter = respCustomFilter;
+        this.CustomResp_List = CustomResp_List;
     }
 
     @Override
@@ -41,11 +41,11 @@ public class threads implements Task {
 
     @Override
     public void run() {
-        go(this.zidian, this.vul, this.newHttpRequestResponse, this.heads, this.Bypass_List, this.respCustomFilter);
+        go(this.zidian, this.vul, this.newHttpRequestResponse, this.heads, this.Bypass_List, this.CustomResp_List);
 
     }
 
-    private static void go(Map<String, Object> zidian, vulscan vul, IHttpRequestResponse newHttpRequestResponse, List<String> heads, List<String> Bypass_List, String respCustomFilter) {
+    private static void go(Map<String, Object> zidian, vulscan vul, IHttpRequestResponse newHttpRequestResponse, List<String> heads, List<String> Bypass_List, String CustomResp_List) {
 
         String name = (String) zidian.get("name");
         boolean loaded = (boolean) zidian.get("loaded");
@@ -98,7 +98,7 @@ public class threads implements Task {
 
             if (states.contains(new Integer(vul.burp.help.analyzeResponse(newHttpRequestResponse.getResponse()).getStatusCode()))) {
                 byte[] resp = newHttpRequestResponse.getResponse();
-                Pattern Resp_rule_filter = Pattern.compile(respCustomFilter, Pattern.CASE_INSENSITIVE);
+                Pattern Resp_rule_filter = Pattern.compile(CustomResp_List, Pattern.CASE_INSENSITIVE);
                 Matcher pipeFilter = Resp_rule_filter.matcher(vul.burp.help.bytesToString(resp));
                 if (pipeFilter.find()) {
                     String matchedContent = pipeFilter.group();
@@ -126,7 +126,7 @@ public class threads implements Task {
 //                            if (vul.burp.help.analyzeResponse(newHttpRequestResponse.getResponse()).getStatusCode() == Integer.parseInt(state)) {
                         if (states.contains(vul.burp.help.analyzeResponse(newHttpRequestResponse.getResponse()).getStatusCode())) {
                             byte[] resp = newHttpRequestResponse.getResponse();
-                            Pattern Resp_rule_filter = Pattern.compile(respCustomFilter, Pattern.CASE_INSENSITIVE);
+                            Pattern Resp_rule_filter = Pattern.compile(CustomResp_List, Pattern.CASE_INSENSITIVE);
                             Matcher pipeFilter = Resp_rule_filter.matcher(vul.burp.help.bytesToString(resp));
                             if (pipeFilter.find()) {
                                 String matchedContent = pipeFilter.group();
