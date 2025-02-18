@@ -10,6 +10,7 @@ import com.sun.jmx.snmp.tasks.Task;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -98,8 +99,9 @@ public class threads implements Task {
 
             if (states.contains(new Integer(vul.burp.help.analyzeResponse(newHttpRequestResponse.getResponse()).getStatusCode()))) {
                 byte[] resp = newHttpRequestResponse.getResponse();
+                String responseString = new String(resp, StandardCharsets.UTF_8);  // 使用UTF-8编码
                 Pattern Resp_rule_filter = Pattern.compile(CustomResp_List, Pattern.CASE_INSENSITIVE);
-                Matcher pipeFilter = Resp_rule_filter.matcher(vul.burp.help.bytesToString(resp));
+                Matcher pipeFilter = Resp_rule_filter.matcher(responseString);
                 if (pipeFilter.find()) {
                     String matchedContent = pipeFilter.group();
                     vul.burp.call.printError("respFilter: " + matchedContent );
@@ -126,8 +128,9 @@ public class threads implements Task {
 //                            if (vul.burp.help.analyzeResponse(newHttpRequestResponse.getResponse()).getStatusCode() == Integer.parseInt(state)) {
                         if (states.contains(vul.burp.help.analyzeResponse(newHttpRequestResponse.getResponse()).getStatusCode())) {
                             byte[] resp = newHttpRequestResponse.getResponse();
+                            String responseString = new String(resp, StandardCharsets.UTF_8);  // 使用UTF-8编码
                             Pattern Resp_rule_filter = Pattern.compile(CustomResp_List, Pattern.CASE_INSENSITIVE);
-                            Matcher pipeFilter = Resp_rule_filter.matcher(vul.burp.help.bytesToString(resp));
+                            Matcher pipeFilter = Resp_rule_filter.matcher(responseString);
                             if (pipeFilter.find()) {
                                 String matchedContent = pipeFilter.group();
                                 vul.burp.call.printError("bypass_respFilter: " + matchedContent );

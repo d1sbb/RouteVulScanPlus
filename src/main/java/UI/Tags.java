@@ -246,6 +246,7 @@ public class Tags extends AbstractTableModel implements ITab, IMessageEditorCont
 
         public URLTable(TableModel tableModel) {
             super(tableModel);
+            setColumnLayoutParameters();
             sorter = new TableRowSorter<TableModel>(tableModel) {
                 @Override
                 public Comparator<?> getComparator(int column) {
@@ -279,6 +280,25 @@ public class Tags extends AbstractTableModel implements ITab, IMessageEditorCont
                     }
                 }
             });
+        }
+        private void setColumnLayoutParameters() {
+            int[] columnWidths = {10, 50, 10, 500, 10, 100, 10, 50, 50};
+            int[] preferredWidths = {10, 100, 10, 600, 10, 100, 20, 100, 100};
+            for (int i = 0; i < columnWidths.length; i++) {
+                TableColumn column = getColumnModel().getColumn(i);
+                column.setMinWidth(columnWidths[i]);
+                column.setPreferredWidth(preferredWidths[i]);  // 设置默认宽度
+                column.setCellRenderer(new DefaultTableCellRenderer() {
+                    @Override
+                    public Component getTableCellRendererComponent(JTable table, Object value,
+                                                                   boolean isSelected, boolean hasFocus,
+                                                                   int row, int column) {
+                        Component rendererComponent = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+                        setHorizontalAlignment(SwingConstants.CENTER);
+                        return rendererComponent;
+                    }
+                });
+            }
         }
         public void changeSelection(int row, int col, boolean toggle, boolean extend) {
             TablesData dataEntry = Tags.this.Udatas.get(convertRowIndexToModel(row));
