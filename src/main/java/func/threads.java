@@ -6,8 +6,6 @@ import burp.IExtensionHelpers;
 import burp.IHttpRequestResponse;
 
 
-import com.sun.jmx.snmp.tasks.Task;
-
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
@@ -18,7 +16,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
-public class threads implements Task {
+public class threads implements Runnable {
     private Map<String, Object> zidian;
     private vulscan vul;
     private IHttpRequestResponse newHttpRequestResponse;
@@ -26,7 +24,7 @@ public class threads implements Task {
     private List<String> Bypass_List;
     private String CustomResp_List;
 
-    public threads(Map<String, Object> zidian, vulscan vul, IHttpRequestResponse newHttpRequestResponse, List<String> heads, List<String> Bypass_List,String CustomResp_List) {
+    public threads(Map<String, Object> zidian, vulscan vul, IHttpRequestResponse newHttpRequestResponse, List<String> heads, List<String> Bypass_List, String CustomResp_List) {
         this.zidian = zidian;
         this.vul = vul;
         this.newHttpRequestResponse = newHttpRequestResponse;
@@ -36,14 +34,8 @@ public class threads implements Task {
     }
 
     @Override
-    public void cancel() {
-
-    }
-
-    @Override
     public void run() {
         go(this.zidian, this.vul, this.newHttpRequestResponse, this.heads, this.Bypass_List, this.CustomResp_List);
-
     }
 
     private static void go(Map<String, Object> zidian, vulscan vul, IHttpRequestResponse newHttpRequestResponse, List<String> heads, List<String> Bypass_List, String CustomResp_List) {
